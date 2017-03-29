@@ -1,0 +1,10 @@
+allprojects {
+
+	repositories {
+		mavenCentral()		
+	}
+	
+	project.ext.junit = ['junit:junit:4.12']  	
+	project.ext.mockito = ['org.mockito:mockito-all:1.10.19']
+	project.ext.log4j = ['log4j:log4j:1.2.17']
+}
