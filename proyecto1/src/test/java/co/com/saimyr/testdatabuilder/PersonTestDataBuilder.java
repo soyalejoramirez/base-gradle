@@ -2,6 +2,7 @@ package co.com.saimyr.testdatabuilder;
 
 import co.com.saimyr.domain.Person;
 
+// TestDataBuilder de patron DataBuilder de GoF
 public class PersonTestDataBuilder {
 	private String name;
 	private String lastName;
