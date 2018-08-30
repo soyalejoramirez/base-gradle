@@ -1,1 +1,1 @@
-include "proyecto1"
+include "web","service","persistence"

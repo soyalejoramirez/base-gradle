@@ -1,0 +1,57 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'jacoco'
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+webAppDirName = "src/main/webapp"
+
+dependencies {
+	// testCompile sirve para usar la dependencia unicamente para pruebas.
+	// providedCompile sirve para usar la dependencia en tiempo de desarrollo pero no incluirla en el artefacto final en este caso jersey está dentro de glassfish.
+	// compile sirve para usar la dependencia en tiempo de desarrollo e incluirla en el artefactor final.
+	
+    	testCompile project.ext.junit
+    	testCompile project.ext.mockito
+	
+	providedCompile project.ext.glassfish
+	providedCompile project.ext.jersey
+	compile project.ext.gson
+	compile project(":service")
+}
+
+war {
+	archiveName 'web.war'
+	manifest {
+        attributes("Implementation-Title": project.name, "Implementation-Timestamp": new Date())
+    }
+}
+
+eclipse {
+	wtp {
+        component {
+            contextPath = 'web'
+        }
+    }
+}
+
+test {
+	jacoco {
+		append = false
+		destinationFile = file("jacoco/jacocoTest.exec")
+	}
+	reports.junitXml.destination =  file("jacoco/test-results")
+}
+
+task deploy(dependsOn: 'war', type:Exec) {
+    workingDir "${glassfishHome}${File.separator}bin"
+
+    if (System.properties['os.name'].toLowerCase().contains('windows')) {
+        commandLine 'cmd', '/c', 'asadmin.bat','--user=admin','--passwordfile='+"${passwordfile}"
+    } else {
+        commandLine "./asadmin"
+    }
+
+    args "deploy", "--force=true", "${war.archivePath}"
+}

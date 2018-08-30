@@ -1,19 +1,20 @@
 apply plugin: 'java'
-apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
 apply plugin: 'jacoco'
 
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
 version = '1.0'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 dependencies {
-    testCompile project.ext.junit
-    testCompile project.ext.mockito
+	compile project.ext.jackson
+   	compile project.ext.hibernate
+    	compile project.ext.ojdbc
 }
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'proyecto1',
+        attributes 'Implementation-Title': 'persistence',
                    'Implementation-Version': version
     }
 }
@@ -25,5 +26,3 @@ test {
 	}
 	reports.junitXml.destination =  file("jacoco/test-results")
 }
-
-jacocoTestReport.dependsOn(test)

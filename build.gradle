@@ -7,4 +7,11 @@ allprojects {
 	project.ext.junit = ['junit:junit:4.12']  	
 	project.ext.mockito = ['org.mockito:mockito-all:1.10.19']
 	project.ext.log4j = ['log4j:log4j:1.2.17']
+
+	project.ext.glassfish = ['org.glassfish.main.extras:glassfish-embedded-all:3.1.2.2']
+	project.ext.jersey = ['com.sun.jersey:jersey-server:1.19', 'com.sun.jersey:jersey-json:1.19', 'com.sun.jersey.contribs:jersey-multipart:1.19']
+	project.ext.jackson = ['org.codehaus.jackson:jackson-core-asl:1.9.13']
+	project.ext.gson = ['com.google.code.gson:gson:2.5']
+	project.ext.hibernate = ['org.hibernate:hibernate-entitymanager:4.2.21.Final']
+	project.ext.ojdbc = ['oracle:ojdbc6:11.2.0.3']
 }
